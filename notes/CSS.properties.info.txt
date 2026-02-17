@@ -1,0 +1,6 @@
+property = box-sizing
+values   = border-box, content-box
+Information = 
+Box sizing defines from where the browser is going to measure an objects size with a given dimension from css,
+if the value is content-box, the css given size is measured from the content of the object, border width and padding is added outside of the given size.
+If it’s border-box the browser matches the outside dimension of the object (including border width and padding) to the given css dimensions
