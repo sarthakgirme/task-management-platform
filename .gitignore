@@ -1,3 +1,4 @@
 web-client/.gitignore
-note
 web-client/.angular
+web-client/.vscode
+/note
