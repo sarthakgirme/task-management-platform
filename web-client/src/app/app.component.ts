@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component} from '@angular/core';
 
 import { HeaderCompoenent } from './components/header/header.component';
-import { UserButtonComponent } from './components/user/user-button.component';
+import { UserButtonComponent } from './components/user-button/user-button.component';
 import { DUMMY_USERS } from './mock-data/dummy-users';
 
 @Component({
@@ -12,5 +12,15 @@ import { DUMMY_USERS } from './mock-data/dummy-users';
     styleUrl: './app.component.css'
 })
 export class AppComponent {
-    public users = DUMMY_USERS;
+    users = DUMMY_USERS;
+    userName!: string;
+
+    onSelectUser(userName: string) {
+        console.log("Selected user with user ID: " + userName);
+        this.userName = userName;
+    }
+
+    displayName() {
+        return this.userName;
+    }
 }
