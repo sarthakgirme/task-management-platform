@@ -1,26 +1,22 @@
 import { Component} from '@angular/core';
 
-import { HeaderCompoenent } from './components/header/header.component';
-import { UserButtonComponent } from './components/user-button/user-button.component';
-import { DUMMY_USERS } from './mock-data/dummy-users';
+import { HeaderComponent } from './layout/header/header.component';
+import { UserButtonComponent } from './shared/components/user-button/user-button.component';
+import { DUMMY_USERS } from './testing/mocks/user.mock';
 
 @Component({
     selector: 'app-root',
     standalone: true, 
-    imports: [HeaderCompoenent, UserButtonComponent],
+    imports: [HeaderComponent, UserButtonComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
 export class AppComponent {
-    users = DUMMY_USERS;
-    userName!: string;
+    protected readonly users = DUMMY_USERS;
+    protected selectedUserName: string = '';
 
-    onSelectUser(userName: string) {
-        console.log("Selected user with user ID: " + userName);
-        this.userName = userName;
-    }
-
-    displayName() {
-        return this.userName;
+    onSelectUser(userName: string): void {
+        this.selectedUserName = userName;
+        console.log(`Selected user with user ID: ${userName}`);
     }
 }
