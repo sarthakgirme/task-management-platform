@@ -1,22 +1,30 @@
-import { Component} from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 
+import { DUMMY_USERS } from './testing/mocks/user.mock';
 import { HeaderComponent } from './layout/header/header.component';
 import { UserButtonComponent } from './shared/components/user-button/user-button.component';
-import { DUMMY_USERS } from './testing/mocks/user.mock';
+import { TaskListComponent } from './shared/components/task-list/task-list.component';
 
 @Component({
     selector: 'app-root',
     standalone: true, 
-    imports: [HeaderComponent, UserButtonComponent],
+    imports: [HeaderComponent, UserButtonComponent, TaskListComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
 export class AppComponent {
+    
     protected readonly users = DUMMY_USERS;
-    protected selectedUserName: string = '';
+    
+    protected selectedUserId = signal<string | undefined>(undefined);
+    protected selectedUser = computed(
+        () => this.users.find(
+            user => user.id === this.selectedUserId()
+        )
+    )
 
-    onSelectUser(userName: string): void {
-        this.selectedUserName = userName;
-        console.log(`Selected user with user ID: ${userName}`);
+    onSelectUser(userId: string): void {
+        this.selectedUserId.set(userId);
     }
+
 }

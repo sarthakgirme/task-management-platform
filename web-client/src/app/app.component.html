@@ -5,15 +5,17 @@
         @for (user of users; track user.id) {
             <li>
                 <app-user-button 
-                    [userId]="user.id"
-                    [avatar]="user.avatar"
-                    [name]="user.name"
-                    (selectUser)="onSelectUser($event)"
+                    [user]="user"
+                    (selectedUser)="onSelectUser($event)"
                 />
             </li>
         }
     </ul>
 
-    {{selectedUserName}}
+    @if (selectedUser()) {
+        <app-task-list [userName]="selectedUser()!.name"/>
+    } @else {
+        <p id="fallback">Select a user to see their tasks!</p>
+    }
 
 </main>

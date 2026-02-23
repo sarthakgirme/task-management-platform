@@ -1,4 +1,5 @@
 import { Component, input, output, computed } from '@angular/core';
+import { User } from '../../../core/models/user.model';
 
 @Component({
   selector: 'app-user-button',
@@ -7,23 +8,20 @@ import { Component, input, output, computed } from '@angular/core';
   styleUrl: './user-button.component.css',
 })
 export class UserButtonComponent {
-
-  // Define class properties using Signals: call Signal as Method; not Property/Variable
-  avatar = input.required<string>();
-  name = input.required<string>();
-  userId = input.required<string>();
   
-  imagePath = computed(
-    () => { return `/users/${this.avatar()}` }
-  );
-  altStatement = computed(
-    () => { return `Avatar of ${this.name()}` }
+  user = input.required<User>();
+  selectedUser = output<string>();
+  
+  protected imagePath = computed(
+    () => { return `/users/${this.user().avatar}` }
   );
 
-  // Define output event emitter
-  selectUser = output<string>();
+  protected altStatement = computed(
+    () => { return `Avatar of ${this.user().name}` }
+  );
 
-  onSelectUser() {
-    this.selectUser.emit(this.name());
+  protected onSelectUser() {
+    this.selectedUser.emit(this.user().id);
   }
+
 }
