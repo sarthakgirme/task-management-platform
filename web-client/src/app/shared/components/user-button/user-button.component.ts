@@ -1,5 +1,6 @@
 import { Component, input, output, computed } from '@angular/core';
-import { User } from '../../../core/models/user.model';
+
+import { type User } from '../../../core/models/user.model';
 
 @Component({
   selector: 'app-user-button',
@@ -10,6 +11,7 @@ import { User } from '../../../core/models/user.model';
 export class UserButtonComponent {
   
   user = input.required<User>();
+  isSelected = input.required<boolean>();
   selectedUser = output<string>();
   
   protected imagePath = computed(
