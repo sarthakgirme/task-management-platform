@@ -12,7 +12,7 @@ export class UserButtonComponent {
   
   user = input.required<User>();
   isSelected = input.required<boolean>();
-  selectedUser = output<string>();
+  protected selectedUser = output<string>();
   
   protected imagePath = computed(
     () => { return `/users/${this.user().avatar}` }

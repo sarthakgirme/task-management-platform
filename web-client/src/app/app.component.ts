@@ -22,7 +22,7 @@ export class AppComponent {
             user => user.id === this.selectedUserId()
         )
     )
-
+    
     onSelectUser(userId: string): void {
         this.selectedUserId.set(userId);
     }
