@@ -2,19 +2,19 @@
 
 <main>
     <ul id="users">
-        @for (user of users; track user.id) {
+        @for (user of userService.allUsers(); track user.id) {
             <li>
                 <app-user-button 
                     [user]="user"
-                    [isSelected]="user.id === selectedUserId()"
+                    [isSelected]="user.id === userService.selectedUser()?.id"
                     (selectedUser)="onSelectUser($event)"
                 />
             </li>
         }
     </ul>
 
-    @if (selectedUser()) {
-        <app-task-list [user]="selectedUser()!"/>
+    @if (userService.selectedUser()){
+        <app-task-list [user]="userService.selectedUser()!"/>
     } @else {
         <p id="fallback">Select a user to see their tasks!</p>
     }
