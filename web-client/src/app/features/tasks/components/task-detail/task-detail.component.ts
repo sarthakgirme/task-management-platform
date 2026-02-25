@@ -1,7 +1,8 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 import { type Task } from '../../../../core/models/task.model';
+import { TaskService } from '../../../../core/services/task.service';
 
 import { CardComponent } from '../../../../shared/components/card/card.component';
 
@@ -15,10 +16,11 @@ import { CardComponent } from '../../../../shared/components/card/card.component
 export class TaskDetailComponent {
 
   task = input.required<Task>();
-  protected complete = output<string>();
+
+  constructor(protected taskService: TaskService) {}
 
   protected onCompleteTask() {
-    this.complete.emit(this.task().id);
+    this.taskService.removeTask(this.task().id);
   }
   
 }

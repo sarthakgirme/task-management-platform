@@ -27,10 +27,6 @@ export class TaskListComponent {
     () => this.taskService.getTaskByUserId(this.user().id)()
   );
 
-  protected onCompleteEvent(taskId: string): void {
-    this.taskService.removeTask(taskId);
-  }
-
   protected onStartAddTaskEvent(): void {
     this.isAddingTask = true;
   }
