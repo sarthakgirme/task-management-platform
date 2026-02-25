@@ -28,7 +28,7 @@ export class TaskService {
         ]);
     }
 
-    completeTask (taskId: string) :void {
+    removeTask (taskId: string) :void {
         this.tasks.update(
             currentTasks => currentTasks.filter(task => task.id !== taskId)
         );

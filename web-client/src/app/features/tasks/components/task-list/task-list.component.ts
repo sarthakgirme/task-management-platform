@@ -28,20 +28,14 @@ export class TaskListComponent {
   );
 
   protected onCompleteEvent(taskId: string): void {
-    this.taskService.completeTask(taskId);
-  }
-
-  protected onAddEvent(newTask: NewTask): void {
-    this.taskService.addTask(this.user().id, newTask)
-    // Close pop-up of AddTaskComponenet
-    this.isAddingTask = false; 
+    this.taskService.removeTask(taskId);
   }
 
   protected onStartAddTaskEvent(): void {
     this.isAddingTask = true;
   }
 
-  protected onCancelAddTaskEvent(): void {
+  protected onCloseAddTaskEvent(): void {
     this.isAddingTask = false;
   }
   
