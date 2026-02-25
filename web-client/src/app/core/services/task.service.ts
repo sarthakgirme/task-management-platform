@@ -9,9 +9,15 @@ import { DUMMY_TASKS } from "../../testing/mocks/task.mock";
 export class TaskService {
     
     private tasks = signal<Task[]>(DUMMY_TASKS);
-
     // Expose read-only signal
     readonly allTasks = this.tasks.asReadonly();
+
+    constructor() {
+        const tasks = localStorage.getItem('tasks');
+        if(tasks) {
+            this.tasks = JSON.parse(tasks);
+        }
+    }
 
     getTaskByUserId(userId: string) :Signal<Task[]> {
         return computed(
@@ -32,6 +38,10 @@ export class TaskService {
         this.tasks.update(
             currentTasks => currentTasks.filter(task => task.id !== taskId)
         );
+    }
+
+    private updateLocalStorage() {
+        localStorage.setItem('tasks', JSON.stringify(this.tasks));
     }
 
 }
